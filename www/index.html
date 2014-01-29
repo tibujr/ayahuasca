@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/estilo.css" />
+        <title>Primera App</title>
+        <script type="text/javascript" src="js/iscroll.js"></script>
+        <script type="text/javascript">
+            var myScroll;
+            function loaded() {
+              myScroll = new iScroll('wrapper', {hScrollbar:true});//new iScroll('wrapper');
+            }
+            document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+            document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
+        </script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/accion.js"></script>
+        <script type="text/javascript">
+            $(document).bind("mobileinit", function() {
+                $.support.cors = true;
+                $.mobile.allowCrossDomainPages = true;
+            });
+        </script>
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+            <div id="scroller">
+                <ul id="thelist">
+                </ul>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="js/phonegap.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>
