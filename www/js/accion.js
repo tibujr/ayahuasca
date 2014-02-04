@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	
-	$.ajax({
+	/*$.ajax({
 		type: 'POST',
 		dataType: 'json', 
 		url : "https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/prueba",
@@ -19,5 +19,9 @@ $(document).ready(function () {
 		error: function(data){
 			console.log(data);
         }
+	});*/
+
+	$("body").on('click', '#btn_entrar_dni', function(e){
+		$.mobile.changePage("#datos");
 	});
 });
