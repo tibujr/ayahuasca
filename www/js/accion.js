@@ -26,10 +26,10 @@ $(document).ready(function () {
 	});
 
 	$("body").on('click', '#btn_reservar', function(e){
-		var nom = $('#nombre').val();//document.getElementById('nombre').value;
-		var cant = $('#cantidad').val();//document.getElementById('cantidad').value;
-		var fecha = $('#fecha').val();//document.getElementById('fecha').value;
-		var hora = $('#hora').val();//document.getElementById('hora').value;
+		var nom = $('#nombre').val();
+		var cant = $('#cantidad').val();
+		var fecha = $('#fecha').val();
+		var hora = $('#hora').val();
 		
 		$('#name_ok').html(nom);
 		$('#cantidad_ok').html(cant);
