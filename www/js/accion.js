@@ -35,7 +35,9 @@ $(document).ready(function () {
 		$('#cantidad_ok').html(cant);
 		$('#fecha_ok').html(fecha);
 		$('#hora_ok').html(hora);
+
 		$.mobile.changePage("#datos_listo");
+		
 	});
 });
 
