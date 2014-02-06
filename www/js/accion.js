@@ -24,4 +24,23 @@ $(document).ready(function () {
 	$("body").on('click', '#btn_entrar_dni', function(e){
 		$.mobile.changePage("#datos");
 	});
+
+	$("body").on('click', '#btn_reservar', function(e){
+		var nom = $('#nombre').val();//document.getElementById('nombre').value;
+		var cant = $('#cantidad').val();//document.getElementById('cantidad').value;
+		var fecha = $('#fecha').val();//document.getElementById('fecha').value;
+		var hora = $('#hora').val();//document.getElementById('hora').value;
+		
+		$('#name_ok').html(nom);
+		$('#cantidad_ok').html(cant);
+		$('#fecha_ok').html(fecha);
+		$('#hora_ok').html(hora);
+		$.mobile.changePage("#datos_listo");
+	});
 });
+
+/*
+//funcion de login fb
+function promptLogin() {
+  FB.login(null, {scope: 'email'});
+}*/

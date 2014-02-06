@@ -2,7 +2,7 @@
 <html>
 <head>
   	<meta charset="UTF-8">
-  	<title>Validacion de usuarios</title>
+  	<title>Reservas - Ayahuasca</title>
   	<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
   	<link rel="stylesheet" type="text/css" href="css/estilo.css" />
   	<script src="js/jquery.js"></script>
@@ -12,7 +12,7 @@
 <body>
 	<div data-role="page" id="inicio">
 		<div data-role="header">
-			<h1>Autenticacion de Usuario</h1>
+			<h1>Autenticar</h1>
 		</div>
 		<div data-role="content">
 			<label>E-Mail</label>
@@ -25,15 +25,15 @@
  
 	<div data-role="page" id="datos">
 		<div data-role="header">
-			<h1>Bienvenido</h1>
+			<h1>Reserva 1</h1>
 		</div>
 		<div data-role="content">	
 			<label>Nombre:</label>
 			<input type="text" id="nombre" name="nombre" value="Maycol Tiburcio">
-			<label>Cantidad :</label>
+			<label>Cantidad de Invitados:</label>
 			<input type="number" id="cantidad" name="cantidad" value="10">
 			<label>Fecha :</label>
-			<input type="date" id="number" name="cantidad">
+			<input type="date" id="fecha" name="fecha">
 			<label>Hora :</label>
 			<select name="hora" id="hora">
 				<option value="18:00">6:00pm</option>
@@ -47,6 +47,47 @@
 			</select>
 			<div class="center-wrapper">
 				<div id="btn_reservar" data-role="button" data-inline="true" data-theme="b" data-icon="check">Reservar</div>
+			</div>
+		</div>
+	</div>
+
+	<div data-role="page" id="datos_listo">
+		<div data-role="header">
+			<h1>Reserva 2</h1>
+		</div>
+		<div data-role="content">	
+			<table data-role="table" id="my-table" data-mode="reflow">
+			  	<thead>
+			    	<tr>
+				      	<th>Nombre :</th>
+				      	<th>Invitado(s) :</th>
+				      	<th>Fecha :</th>
+				      	<th>Hora :</th>
+			    	</tr>
+			  	</thead>
+			  	<tbody>
+			    	<tr>
+				      	<th id="name_ok"></th>
+				      	<td id="cantidad_ok"></td>
+				      	<td id="fecha_ok"></td>
+				      	<td id="hora_ok"></td>
+			    	</tr>
+			    </tbody>
+			</table>
+			<div class="center-wrapper">
+				<div id="btn_historial" data-role="button" data-inline="true" data-theme="b" data-icon="search" data-iconpos="right">Historial</div>
+			</div>
+		</div>
+	</div>
+
+	<div data-role="page" id="historial">
+		<div data-role="header">
+			<h1>Historial</h1>
+		</div>
+		<div data-role="content">	
+			
+			<div class="center-wrapper">
+				<div id="btn_historial" data-role="button" data-inline="true" data-theme="b" data-icon="search" data-iconpos="right">Historial</div>
 			</div>
 		</div>
 	</div>
