@@ -1,4 +1,28 @@
 $(document).ready(function () {
+
+	/*$(document).bind('deviceready', function(){
+		//Phonegap ready
+		onDeviceReady();
+	});*/
+
+	$.ajax({
+		type: 'POST',
+		url : "https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/leer_data_face",
+		success : function(data) {
+			var a = String(data);
+			alert(a)
+			if(a == "<iframe src='https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/login_face' id='chan'></iframe>"){
+				$("#cont_face").html(a);
+			}
+			else if(a != 0){
+				$.mobile.changePage("#datos");
+			}
+		},
+		error: function(data){
+			console.log(data);
+        }
+	});
+	  
 	
 	/*$.ajax({
 		type: 'POST',
@@ -21,7 +45,24 @@ $(document).ready(function () {
         }
 	});*/
 
-	$("body").on('click', '#btn_entrar_dni', function(e){
+	$("body").on('click', '#facebook', function(e){
+		/*var frame = document.getElementById('chan');
+		var txt = frame.contentWindow.document.getElementById('idface').value;
+		alert(txt);*/
+		$.ajax({
+			type: 'POST',
+			url : "https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/login_face",
+			success : function(data) {
+				//var a = String(data);
+				//top.location(a);
+				alert(data);
+	        }
+		});
+		//FB.login();
+	});
+
+
+	/*$("body").on('click', '#btn_entrar_dni', function(e){
 		$.mobile.changePage("#datos");
 	});
 
@@ -38,7 +79,7 @@ $(document).ready(function () {
 
 		$.mobile.changePage("#datos_listo");
 		
-	});
+	});*/
 });
 
 /*

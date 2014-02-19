@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <meta http-equiv="Access-Control-Allow-Origin" content="*">
         <meta name="format-detection" content="telephone=no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
@@ -33,13 +34,23 @@
             <div id="scroller">
                 <ul id="thelist">
                 </ul>
+
+            <div id="facebook" style="width: auto; height: 20px; cursor: pointer;">Facebook</div>
+            <div id="cont_face" style="height: 200px;"></div>
             </div>
         </div>
+
+        <form name="form1" action="" method="">
+          <input type="hidden" value="" id="id_face"></div>
+        </form>
 
         <script type="text/javascript" src="js/phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
+
+        <!--<iframe src="https://roinet.pe/facebook/app_ayahuasca/reserva/channel.html" id="chan"></iframe>-->
+
     </body>
 </html>
