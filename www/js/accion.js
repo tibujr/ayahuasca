@@ -103,7 +103,7 @@ $(document).ready(function () {
 				$("#hora").focus().after("<span class='menError'>Indicar hora de reserva</span>");
 				return false;
 			}else{
-				envres++;
+				envres = 1;
 				$.ajax({
 					type: 'POST',
 					dataType: 'json', 
@@ -119,7 +119,7 @@ $(document).ready(function () {
 						$('#hora_ok').html(hora);
 
 						$(".main").css({display: 'none'});
-						envres = 0;
+						envres = 3;
 
 						$.mobile.changePage("#datos_listo");
 					},
@@ -128,6 +128,8 @@ $(document).ready(function () {
 			        }
 				});
 			}
+		}else if(envres == 3){
+			alert("Muy pronto para a hacer otra reserva, cerrar el programa");
 		}
 	});
 
