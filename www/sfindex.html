@@ -75,24 +75,22 @@
 			<h1>Reserva</h1>
 		</div>
 		<div data-role="content">	
-			<table data-role="table" id="my-table" data-mode="reflow">
-			  	<thead>
-			    	<tr>
-				      	<th>Nombre :</th>
-				      	<th>Invitado(s) :</th>
-				      	<th>Fecha :</th>
-				      	<th>Hora :</th>
-			    	</tr>
-			  	</thead>
-			  	<tbody>
-			    	<tr>
-				      	<th id="name_ok"></th>
-				      	<td id="cantidad_ok"></td>
-				      	<td id="fecha_ok"></td>
-				      	<td id="hora_ok"></td>
-			    	</tr>
-			    </tbody>
-			</table>
+			<div class="center-wrapper">	
+				<section id="con_table">
+					<article class="col">
+						<div class="fil fil1">Nombre :</div>
+						<div class="fil fil1">Invitado(s) :</div>
+						<div class="fil fil1">Fecha :</div>
+						<div class="fil fil1">Hora :</div>
+					</article>
+					<article class="col">
+						<div class="fil" id="name_ok"></div>
+						<div class="fil" id="cantidad_ok"></div>
+						<div class="fil" id="fecha_ok"></div>
+						<div class="fil" id="hora_ok"></div>
+					</article>
+				</section>
+			</div>
 			<div class="center-wrapper">
 				<div id="btn_listo" data-role="button" data-inline="true" data-theme="b" data-icon="check" data-iconpos="right">Listo</div>
 			</div>

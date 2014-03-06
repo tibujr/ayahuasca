@@ -46,6 +46,23 @@ body{
   text-shadow: none;
 }
 
+.con_table{
+  display: inline-block;
+}
+
+.col{
+  display: inline-block;
+  text-align: left;
+}
+
+.fil{
+  padding: 15px;
+}
+
+.fil1{
+  font-weight: bold;
+}
+
 
 
 /*--CARGANDO CSS-*/
