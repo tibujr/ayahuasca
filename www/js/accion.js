@@ -86,7 +86,7 @@ $(document).ready(function () {
 
 	$("body").on('click', '#btn_reservar', function(e){
 		
-		if(envres < 2){
+		if(envres == 0){
 			var nom = $('#nombre').val();
 			var mail = $('#mail').val();
 			var cant = $('#cantidad').val();
