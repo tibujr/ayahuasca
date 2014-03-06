@@ -1,7 +1,8 @@
 $(document).ready(function () {
 
 	var emailreg = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
-
+	var envmail = 0;
+	var envres = 0;
 	/*$(document).bind('deviceready', function(){
 		//Phonegap ready
 		onDeviceReady();
@@ -44,29 +45,35 @@ $(document).ready(function () {
 
 	$("body").on('click', '#btn_entrar_dni', function(e){
 
-		var correo = $("#mail").val();
+		if(envmail == 0){
+			console.log(envmail)
+			var correo = $("#mail").val();
+			if( correo == "" || !emailreg.test(correo)){
+				$("#mail").focus().after("<span class='menError'>Ingresa un E-mail válido</span>");
+				return false;
+			}else{
+				envmail++;
+				$.ajax({
+					type: 'POST',
+					dataType: 'json', 
+					data: {correo : correo},
+					beforeSend : function (){
+		                $(".main").css({display: 'inline-block'});
+		            },
+					url: "https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/verificar_correo",
+					success : function(data) {
+						document.getElementById('nombre').value = data['usu'];
 
-		if( correo == "" || !emailreg.test(correo)){
-			$("#mail").focus().after("<span class='menError'>Ingresa un E-mail válido</span>");
-			return false;
-		}else{
-			$.ajax({
-				type: 'POST',
-				dataType: 'json', 
-				data: {correo : correo},
-				beforeSend : function (){
-	                $(".main").css({display: 'inline-block'});
-	            },
-				url: "https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/verificar_correo",
-				success : function(data) {
-					document.getElementById('nombre').value = data['usu'];
-					$(".main").css({display: 'none'});
-					$.mobile.changePage("#datos");
-				},
-				error: function(data){
-					console.log(data);
-		        }
-			});
+						$(".main").css({display: 'none'});
+						envmail = 0;
+
+						$.mobile.changePage("#datos");
+					},
+					error: function(data){
+						console.log(data);
+			        }
+				});
+			}
 		}
 	});
 
@@ -78,42 +85,49 @@ $(document).ready(function () {
 	});
 
 	$("body").on('click', '#btn_reservar', function(e){
-		var nom = $('#nombre').val();
-		var mail = $('#mail').val();
-		var cant = $('#cantidad').val();
-		var fecha = $('#fecha').val();
-		var hora = $('#hora').val();
+		
+		if(envres < 2){
+			var nom = $('#nombre').val();
+			var mail = $('#mail').val();
+			var cant = $('#cantidad').val();
+			var fecha = $('#fecha').val();
+			var hora = $('#hora').val();
 
-		if( nom == "" ){
-			$("#nombre").focus().after("<span class='menError'>Ingresa tu nombre</span>");
-			return false;
-		}else if( fecha < $('#f_hoy').val()){
-			$("#fecha").focus().after("<span class='menError'>Verificar fecha</span>");
-			return false;
-		}else if( hora == 0){
-			$("#hora").focus().after("<span class='menError'>Indicar hora de reserva</span>");
-			return false;
-		}else{
-			$.ajax({
-				type: 'POST',
-				dataType: 'json', 
-				data: {nom : nom, mail : mail, cant : cant, fecha : fecha, hora : hora},
-				beforeSend : function (){
-	                $(".main").css({display: 'inline-block'});
-	            },
-				url: "https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/guardar_reserva_sf",
-				success : function(data) {
-					$('#name_ok').html(nom);
-					$('#cantidad_ok').html(cant);
-					$('#fecha_ok').html(fecha);
-					$('#hora_ok').html(hora);
-					$(".main").css({display: 'none'});
-					$.mobile.changePage("#datos_listo");
-				},
-				error: function(data){
-					console.log(data);
-		        }
-			});
+			if( nom == "" ){
+				$("#nombre").focus().after("<span class='menError'>Ingresa tu nombre</span>");
+				return false;
+			}else if( fecha < $('#f_hoy').val()){
+				$("#fecha").focus().after("<span class='menError'>Verificar fecha</span>");
+				return false;
+			}else if( hora == 0){
+				$("#hora").focus().after("<span class='menError'>Indicar hora de reserva</span>");
+				return false;
+			}else{
+				envres++;
+				$.ajax({
+					type: 'POST',
+					dataType: 'json', 
+					data: {nom : nom, mail : mail, cant : cant, fecha : fecha, hora : hora},
+					beforeSend : function (){
+		                $(".main").css({display: 'inline-block'});
+		            },
+					url: "https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/guardar_reserva_sf",
+					success : function(data) {
+						$('#name_ok').html(nom);
+						$('#cantidad_ok').html(cant);
+						$('#fecha_ok').html(fecha);
+						$('#hora_ok').html(hora);
+
+						$(".main").css({display: 'none'});
+						envres = 0;
+
+						$.mobile.changePage("#datos_listo");
+					},
+					error: function(data){
+						console.log(data);
+			        }
+				});
+			}
 		}
 	});
 
