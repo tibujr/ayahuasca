@@ -1,0 +1,105 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  	<meta charset="UTF-8">
+  	<title>Reservas - Ayahuasca</title>
+  	<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
+  	<link rel="stylesheet" type="text/css" href="css/estilo.css" />
+  	<script src="js/jquery.js"></script>
+  	<script src="js/jquery.mobile-1.3.1.min.js"></script>
+  	<script type="text/javascript" src="js/accion.js"></script>
+  	<script type="text/javascript" charset="utf-8">  
+         function showConfirm() {
+	        navigator.notification.confirm(
+	            'Desea salir de Ayahuasca?',  // message
+	            exitFromApp,              // callback to invoke with index of button pressed
+	            'Salir',            // title
+	            'Cancel,OK'         // buttonLabels
+	        );
+	    }
+	    
+	    function exitFromApp(buttonIndex) {
+	      	if (buttonIndex==2){
+	       		navigator.app.exitApp();
+    		}
+    	}
+    </script>
+</head>
+<body>
+
+	<div data-role="page" id="inicio">
+		<div data-role="header">
+			<h1>Autenticar</h1>
+			<a onclick="showConfirm(); return false;" data-icon="delete" data-theme="b" data-iconpos="notext" class="ui-btn-right">Salir</a>
+		</div>
+		<div data-role="content">
+			<label>Email de facebook</label> 
+			<input type="email" id="mail" name="mail" value="" placeholder="Ingresa tu Email de facebook">
+			<div class="center-wrapper">
+				<div id="btn_entrar_dni" data-role="button" data-inline="true" data-theme="b" data-icon="arrow-r" data-iconpos="right">Entrar</div>
+			</div>
+		</div>
+	</div>
+ 
+	<div data-role="page" id="datos">
+		<div data-role="header">
+			<h1>Reserva</h1>
+		</div>
+		<div data-role="content">	
+			<label>Nombre:</label>
+			<input type="text" id="nombre" name="nombre" value="" placeholder="Ingresa tu nombre">
+			<label>Cantidad de Invitados:</label>
+			<div data-role="fieldcontain">
+			 	<input type="range" name="cantidad" id="cantidad" value="15" min="1" max="100"  />
+			</div>
+			<label>Fecha :</label>
+			<input type="hidden" id="f_hoy" name="f_hoy">
+			<input type="date" id="fecha" name="fecha">
+			<label>Hora :</label>
+			<select name="hora" id="hora">
+				<option value="0">Seleccionar</option>
+				<option value="18:00">6:00pm</option>
+				<option value="18:30">6:30pm</option>
+				<option value="19:00">7:00pm</option>
+				<option value="19:30">7:30pm</option>
+				<option value="20:00">8:00pm</option>
+				<option value="20:30">8:30pm</option>
+				<option value="21:00">9:00pm</option>
+				<option value="21:30">9:30pm</option>
+			</select>
+			<div class="center-wrapper">
+				<div id="btn_reservar" data-role="button" data-inline="true" data-theme="b" data-icon="check">Reservar</div>
+			</div>
+		</div>
+	</div>
+
+	<div data-role="page" id="datos_listo">
+		<div data-role="header">
+			<h1>Reserva</h1>
+		</div>
+		<div data-role="content">	
+			<table data-role="table" id="my-table" data-mode="reflow">
+			  	<thead>
+			    	<tr>
+				      	<th>Nombre :</th>
+				      	<th>Invitado(s) :</th>
+				      	<th>Fecha :</th>
+				      	<th>Hora :</th>
+			    	</tr>
+			  	</thead>
+			  	<tbody>
+			    	<tr>
+				      	<th id="name_ok"></th>
+				      	<td id="cantidad_ok"></td>
+				      	<td id="fecha_ok"></td>
+				      	<td id="hora_ok"></td>
+			    	</tr>
+			    </tbody>
+			</table>
+			<div class="center-wrapper">
+				<div id="btn_listo" data-role="button" data-inline="true" data-theme="b" data-icon="check" data-iconpos="right">Listo</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
