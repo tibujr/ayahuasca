@@ -1,29 +1,12 @@
 $(document).ready(function () {
 
+	var emailreg = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+
 	/*$(document).bind('deviceready', function(){
 		//Phonegap ready
 		onDeviceReady();
 	});*/
 
-	$.ajax({
-		type: 'POST',
-		url : "https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/leer_data_face",
-		success : function(data) {
-			var a = String(data);
-			alert(a)
-			if(a == "<iframe src='https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/login_face' id='chan'></iframe>"){
-				$("#cont_face").html(a);
-			}
-			else if(a != 0){
-				$.mobile.changePage("#datos");
-			}
-		},
-		error: function(data){
-			console.log(data);
-        }
-	});
-	  
-	
 	/*$.ajax({
 		type: 'POST',
 		dataType: 'json', 
@@ -45,45 +28,109 @@ $(document).ready(function () {
         }
 	});*/
 
-	$("body").on('click', '#facebook', function(e){
-		/*var frame = document.getElementById('chan');
-		var txt = frame.contentWindow.document.getElementById('idface').value;
-		alert(txt);*/
-		$.ajax({
-			type: 'POST',
-			url : "https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/login_face",
-			success : function(data) {
-				//var a = String(data);
-				//top.location(a);
-				alert(data);
-	        }
-		});
-		//FB.login();
+	$.ajax({
+		type: 'POST',
+		dataType: 'json', 
+		url : "https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/get_datosinicio",
+		success : function(data) {
+			document.getElementById('fecha').value = data['fecha'];
+			document.getElementById('f_hoy').value = data['fecha'];
+		},
+		error: function(data){
+			console.log(data);
+        }
 	});
 
 
-	/*$("body").on('click', '#btn_entrar_dni', function(e){
-		$.mobile.changePage("#datos");
+	$("body").on('click', '#btn_entrar_dni', function(e){
+
+		var correo = $("#mail").val();
+
+		if( correo == "" || !emailreg.test(correo)){
+			$("#mail").focus().after("<span class='menError'>Ingresa un E-mail válido</span>");
+			return false;
+		}else{
+			$.ajax({
+				type: 'POST',
+				dataType: 'json', 
+				data: {correo : correo},
+				url: "https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/verificar_correo",
+				success : function(data) {
+					document.getElementById('nombre').value = data['usu'];
+					$.mobile.changePage("#datos");
+				},
+				error: function(data){
+					console.log(data);
+		        }
+			});
+		}
+	});
+
+	$("#mail").keyup(function(){
+		if( $(this).val() != "" && emailreg.test($(this).val())){
+			$(".menError").fadeOut();			
+			return false;
+		}		
 	});
 
 	$("body").on('click', '#btn_reservar', function(e){
 		var nom = $('#nombre').val();
+		var mail = $('#mail').val();
 		var cant = $('#cantidad').val();
 		var fecha = $('#fecha').val();
 		var hora = $('#hora').val();
-		
-		$('#name_ok').html(nom);
-		$('#cantidad_ok').html(cant);
-		$('#fecha_ok').html(fecha);
-		$('#hora_ok').html(hora);
 
-		$.mobile.changePage("#datos_listo");
-		
-	});*/
+		if( nom == "" ){
+			$("#nombre").focus().after("<span class='menError'>Ingresa tu nombre</span>");
+			return false;
+		}else if( fecha < $('#f_hoy').val()){
+			$("#fecha").focus().after("<span class='menError'>Verificar fecha</span>");
+			return false;
+		}else if( hora == 0){
+			$("#hora").focus().after("<span class='menError'>Indicar hora de reserva</span>");
+			return false;
+		}else{
+			$.ajax({
+				type: 'POST',
+				dataType: 'json', 
+				data: {nom : nom, mail : mail, cant : cant, fecha : fecha, hora : hora},
+				url: "https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/guardar_reserva_sf",
+				success : function(data) {
+					$('#name_ok').html(nom);
+					$('#cantidad_ok').html(cant);
+					$('#fecha_ok').html(fecha);
+					$('#hora_ok').html(hora);
+
+					$.mobile.changePage("#datos_listo");
+				},
+				error: function(data){
+					console.log(data);
+		        }
+			});
+		}
+	});
+
+	$("#nombre").keyup(function(){
+		if( $(this).val() != "" ){
+			$(".menError").fadeOut();			
+			return false;
+		}		
+	});
+
+	$("body").on('change', '#fecha', function(e){
+		$(".menError").fadeOut();			
+		return false;
+	});
+
+	$("body").on('change', '#hora', function(e){
+		$(".menError").fadeOut();			
+		return false;
+	});
+
+	$("body").on('click', '#btn_listo', function(e){
+		var mail = $('#mail').val();
+		document.getElementById('mail').value = mail;
+		$.mobile.changePage("#inicio");
+	});
 });
 
-/*
-//funcion de login fb
-function promptLogin() {
-  FB.login(null, {scope: 'email'});
-}*/

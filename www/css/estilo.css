@@ -1,3 +1,8 @@
+
+/*
+
+atributos de iframe fb connect*/
+
 #contiframe{
   display: inline-block;
   width: 100%;
@@ -9,7 +14,12 @@ body{
   margin: 0;
 }
 
-/*.center-button{
+
+/*
+
+propuesta sin facebook*/
+
+.center-button{
   margin: 0 auto;
 }
 
@@ -27,6 +37,20 @@ body{
   max-width: 200px;
   height: auto;
 }
+
+.menError{
+  background: rgb(88, 122, 160);
+  display: block;
+  font-family: arial;
+  color: white;
+  text-align: center;
+  padding: 3px 10px;
+  position: absolute;
+  font-size: 15px;
+  text-shadow: none;
+}
+
+
 /*
 //complemento para centar
 .center-wrapper * {
