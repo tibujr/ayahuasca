@@ -54,9 +54,13 @@ $(document).ready(function () {
 				type: 'POST',
 				dataType: 'json', 
 				data: {correo : correo},
+				beforeSend : function (){
+	                $(".main").css({display: 'inline-block'});
+	            },
 				url: "https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/verificar_correo",
 				success : function(data) {
 					document.getElementById('nombre').value = data['usu'];
+					$(".main").css({display: 'none'});
 					$.mobile.changePage("#datos");
 				},
 				error: function(data){
@@ -94,13 +98,16 @@ $(document).ready(function () {
 				type: 'POST',
 				dataType: 'json', 
 				data: {nom : nom, mail : mail, cant : cant, fecha : fecha, hora : hora},
+				beforeSend : function (){
+	                $(".main").css({display: 'inline-block'});
+	            },
 				url: "https://roinet.pe/facebook/app_ayahuasca/reserva/index.php/mobile_controller/guardar_reserva_sf",
 				success : function(data) {
 					$('#name_ok').html(nom);
 					$('#cantidad_ok').html(cant);
 					$('#fecha_ok').html(fecha);
 					$('#hora_ok').html(hora);
-
+					$(".main").css({display: 'none'});
 					$.mobile.changePage("#datos_listo");
 				},
 				error: function(data){
